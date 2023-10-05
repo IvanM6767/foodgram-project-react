@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv_path = os.path.join(BASE_DIR.parent, '.env')
 load_dotenv(dotenv_path)
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-~n]Gb,=.~!QKtftUxXAQ%8iKIe;.DGBq}|_zpR}{E"6{Agz+!;')
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-~A3s8D2j6G5k9M1p4S7v0Y2d6H1m3P5t8')
 
 DEBUG = os.getenv('DEBUG', True)
 
