@@ -13,7 +13,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
-    image: ivnio/foodgram_backend
+    image: ivnio/foodgram_backend:latest
     env_file: .env
     depends_on:
       - db
@@ -22,12 +22,12 @@ services:
       - media:/app/media
       - ./data:/app/data
   frontend:
-    image: ivnio/foodgram_frontend
+    image: ivnio/foodgram_frontend:latest
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static/
   gateway:
-    image: ivnio/foodgram_gateway
+    image: ivnio/foodgram_gateway:latest
     depends_on:
       - backend
     ports:

@@ -8,14 +8,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv_path = os.path.join(BASE_DIR.parent, '.env')
 load_dotenv(dotenv_path)
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-~A3s8D2j6G5k9M1p4S7v0Y2d6H1m3P5t8')
+SECRET_KEY = 'gcm_4tkhv^8bul%ltd%0zbdjxgl&nl@ew8p-#h=44w_5mxz(*t'
 
-DEBUG = os.getenv('DEBUG', True)
+DEBUG = True
 
-if os.getenv('DJANGO_ENV') == 'production':
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_PROD', '').split(',')
-else:
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS_DEV', '').split(',')
+ALLOWED_HOSTS = ['158.160.21.222', '127.0.0.1', 'localhost', 'ivniofd.ddns.net']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -127,3 +124,6 @@ DJOSER = {
         'user_delete': ['rest_framework.permissions.IsAdminUser'],
     },
 }
+
+
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'http:// 127.0.0.1').split(',')

@@ -1,4 +1,5 @@
-version: '3.3'
+version: '3'
+
 services:
 
   db:
@@ -7,41 +8,43 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
+    restart: always
 
   backend:
-    image: ivnio/foodgram-backend:latest
+    image: ivnio/foodgram_backend:latest
     restart: always
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
+      - redoc:/app/api/docs/
     depends_on:
       - db
     env_file:
       - ./.env
 
   frontend:
-    image: ivnio/foodgram-frontend:latest
+    image: ivnio/foodgram_frontend:latest
     volumes:
-      - ../frontend:/app/result_build/
-    depends_on:
-      - backend
+      - ../frontend/:/app/result_build/
 
   nginx:
-    image: nginx:1.21.1
+    image: nginx:1.21.3-alpine
     ports:
       - "80:80"
     volumes:
-      - static_value:/var/html/static
-      - media_value:/var/html/media
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./foodgramproject.crt:/etc/nginx/foodgram.crt
+      - ./foodgramproject.key:/etc/nginx/foodgram.key
       - ../frontend/build:/usr/share/nginx/html/
-      - ../docs/:/usr/share/nginx/html/api/docs/
+      - static_value:/var/html/static/
+      - media_value:/var/html/media/
+      - redoc:/usr/share/nginx/html/api/docs/
     depends_on:
-      - frontend
-    env_file:
-      - ./.env
+      - backend
+    restart: always
 
 volumes:
   static_value:
   media_value:
   postgres_data:
+  redoc:
