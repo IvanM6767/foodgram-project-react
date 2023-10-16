@@ -18,7 +18,6 @@ class Ingredient(models.Model):
 
     name = models.CharField(
         max_length=CHARS_MAX_LEN,
-        blank=False,
         db_index=True,
         verbose_name='Название'
     )
@@ -93,7 +92,7 @@ class Recipe(models.Model):
         blank=False,
         verbose_name='Описание'
     )
-    cooking_time = models.PositiveIntegerField(
+    cooking_time = models.PositiveSmallIntegerField(
         validators=[MaxValueValidator(MAX_COOKING_TIME),
                     MinValueValidator(MIN_COOKING_TIME)],
         blank=False,
@@ -147,7 +146,7 @@ class IngredientRecipe(models.Model):
         related_name='recipe_ingredients',
         verbose_name='Рецепт'
     )
-    amount = models.PositiveIntegerField(
+    amount = models.PositiveSmallIntegerField(
         validators=[MaxValueValidator(MAX_AMOUNT_INGREDIENT),
                     MinValueValidator(MIN_AMOUNT_INGREDIENT)],
         blank=False,
