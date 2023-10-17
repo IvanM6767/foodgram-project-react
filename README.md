@@ -53,7 +53,7 @@ sudo docker-compose -f docker-compose.production.yml exec backend cp -r /app/sta
 ```
 docker compose exec -it backend python manage.py parse_json data/ingredients.json
 ```
-* Создать адмнистратора для управления сайтом:
+* Создать администратора для управления сайтом:
 ```
 docker compose exec -it backend python manage.py createsuperuser
 ```
